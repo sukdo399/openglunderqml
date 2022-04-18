@@ -1,7 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtWebEngine 1.10
-import OpenGLUnderQML 1.0
 
 Window {
     visible: true
@@ -16,5 +15,10 @@ Window {
         anchors.bottom: parent.bottom
         backgroundColor: "transparent"
         url: "qrc:/main.html"
+    }
+    Rectangle {
+        anchors.fill: parent
+        color: "transparent"
+        border.color: "red"
     }
 }

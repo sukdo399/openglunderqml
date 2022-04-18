@@ -6,10 +6,11 @@ import OpenGLUnderQML 1.0
 Window {
     id: rootWindow
     visible: true
-    width: 200
-    height: 200
-    x: 200
-    y: 200
+    color: "transparent"
+    width: 1280
+    height: 720
+    x: 0
+    y: 0
 
     OpenglTest {
 //        SequentialAnimation on t {
@@ -32,9 +33,10 @@ Window {
         }
     }
 
-    Rectangle {
+    WebEngineView {
         anchors.fill: parent
-        color: "transparent"
-        border.color: "blue"
+        anchors.bottom: parent.bottom
+        backgroundColor: "transparent"
+        url: "qrc:/main.html"
     }
 }

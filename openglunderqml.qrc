@@ -3,5 +3,6 @@
         <file>main.qml</file>
         <file>main.html</file>
         <file>opengl.qml</file>
+        <file>one_window.qml</file>
     </qresource>
 </RCC>

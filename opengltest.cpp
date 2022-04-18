@@ -1,53 +1,3 @@
-/****************************************************************************
-**
-** Copyright (C) 2016 The Qt Company Ltd.
-** Contact: https://www.qt.io/licensing/
-**
-** This file is part of the demonstration applications of the Qt Toolkit.
-**
-** $QT_BEGIN_LICENSE:BSD$
-** Commercial License Usage
-** Licensees holding valid commercial Qt licenses may use this file in
-** accordance with the commercial license agreement provided with the
-** Software or, alternatively, in accordance with the terms contained in
-** a written agreement between you and The Qt Company. For licensing terms
-** and conditions see https://www.qt.io/terms-conditions. For further
-** information use the contact form at https://www.qt.io/contact-us.
-**
-** BSD License Usage
-** Alternatively, you may use this file under the terms of the BSD license
-** as follows:
-**
-** "Redistribution and use in source and binary forms, with or without
-** modification, are permitted provided that the following conditions are
-** met:
-**   * Redistributions of source code must retain the above copyright
-**     notice, this list of conditions and the following disclaimer.
-**   * Redistributions in binary form must reproduce the above copyright
-**     notice, this list of conditions and the following disclaimer in
-**     the documentation and/or other materials provided with the
-**     distribution.
-**   * Neither the name of The Qt Company Ltd nor the names of its
-**     contributors may be used to endorse or promote products derived
-**     from this software without specific prior written permission.
-**
-**
-** THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-** "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-** LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-** A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
-** OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-** SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-** LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-** DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-** THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-** (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-** OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."
-**
-** $QT_END_LICENSE$
-**
-****************************************************************************/
-
 #include "opengltest.h"
 
 #include <QtQuick/qquickwindow.h>
@@ -57,16 +7,13 @@
 
 #include <math.h>
 
-//! [7]
 OpenglTest::OpenglTest()
     : m_t(0)
     , m_renderer(nullptr)
 {
     connect(this, &QQuickItem::windowChanged, this, &OpenglTest::handleWindowChanged);
 }
-//! [7]
 
-//! [8]
 void OpenglTest::setT(qreal t)
 {
     if (t == m_t)
@@ -76,23 +23,17 @@ void OpenglTest::setT(qreal t)
     if (window())
         window()->update();
 }
-//! [8]
 
-//! [1]
 void OpenglTest::handleWindowChanged(QQuickWindow *win)
 {
     if (win) {
         connect(win, &QQuickWindow::beforeSynchronizing, this, &OpenglTest::sync, Qt::DirectConnection);
         connect(win, &QQuickWindow::sceneGraphInvalidated, this, &OpenglTest::cleanup, Qt::DirectConnection);
-//! [1]
-//! [3]
         // Ensure we start with cleared to black. The OpenglTest's blend mode relies on this.
 //        win->setColor(Qt::black);
     }
 }
-//! [3]
 
-//! [6]
 void OpenglTest::cleanup()
 {
     delete m_renderer;
@@ -118,9 +59,7 @@ OpenglTestRenderer::~OpenglTestRenderer()
 {
     delete m_program;
 }
-//! [6]
 
-//! [9]
 void OpenglTest::sync()
 {
     if (!m_renderer) {
@@ -132,9 +71,7 @@ void OpenglTest::sync()
     }
     m_renderer->setT(m_t);
 }
-//! [9]
 
-//! [4]
 void OpenglTestRenderer::init()
 {
     if (!m_program) {
@@ -324,7 +261,6 @@ void OpenglTestRenderer::PerspectiveMatrix(glMatrix *result, float fovy, float a
     MultiplyMatrix(result, &m, result);
 }
 
-//! [4] //! [5]
 void OpenglTestRenderer::paint()
 {
     // Play nice with the RHI. Not strictly needed when the scenegraph uses
@@ -338,7 +274,10 @@ void OpenglTestRenderer::paint()
     TranslateMatrix(&modelview, 0.0f, 0.0f, -4.0f);
     RotationMatrix(&modelview, angle, 1.0f, 1.0f, 0.0);
 
-    angle = m_t;
+//    angle = m_t;
+    angle += 0.3f;
+    if (angle > 360.0f)
+        angle -= 360.0f;
 
     /* Compute the final MVP by multiplying the model-view and perspective matrices together */
     MultiplyMatrix(&mvp, &modelview, &projection);
@@ -373,4 +312,3 @@ void OpenglTestRenderer::paint()
 
     m_window->endExternalCommands();
 }
-//! [5]
