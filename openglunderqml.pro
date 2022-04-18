@@ -1,12 +1,14 @@
-QT += qml quick
+QT += qml quick webengine
 
 CONFIG += qmltypes
+
 QML_IMPORT_NAME = OpenGLUnderQML
 QML_IMPORT_MAJOR_VERSION = 1
 
-HEADERS += squircle.h
-SOURCES += squircle.cpp main.cpp
+HEADERS += \
+    opengltest.h
+SOURCES += main.cpp \
+    opengltest.cpp
 RESOURCES += openglunderqml.qrc
 
-target.path = $$[QT_INSTALL_EXAMPLES]/quick/scenegraph/openglunderqml
-INSTALLS += target
+DISTFILES +=
