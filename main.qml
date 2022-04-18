@@ -5,19 +5,11 @@ import OpenGLUnderQML 1.0
 
 Window {
     visible: true
+    color: "transparent"
     width: 1280
     height: 720
-
-    OpenglTest {
-        SequentialAnimation on t {
-            NumberAnimation {
-                to: 360
-                duration: 3000
-            }
-            loops: Animation.Infinite
-            running: true
-        }
-    }
+    x: 0
+    y: 0
 
     WebEngineView {
         anchors.fill: parent
