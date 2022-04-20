@@ -2,8 +2,9 @@
 #define OPENGLTEST_H
 
 #include <QtQuick/QQuickItem>
-#include <QtGui/QOpenGLShaderProgram>
-#include <QtGui/QOpenGLFunctions>
+#include <QtQuick/QQuickWindow>
+#include <QOpenGLShaderProgram>
+#include <QOpenGLFunctions>
 
 typedef struct
 {
@@ -16,7 +17,6 @@ typedef struct
 #define PI                    3.1415926534f
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
 
-//! [1]
 class OpenglTestRenderer : public QObject, protected QOpenGLFunctions
 {
     Q_OBJECT
@@ -78,9 +78,7 @@ private:
          0.5f, -0.5f,  0.5f,  0.5f, 1.0f, 0.5         // 7
     };
 };
-//! [1]
 
-//! [2]
 class OpenglTest : public QQuickItem
 {
     Q_OBJECT
@@ -109,6 +107,5 @@ private:
     qreal m_t;
     OpenglTestRenderer *m_renderer;
 };
-//! [2]
 
 #endif // OPENGLTEST_H

@@ -1,4 +1,9 @@
-QT += qml quick webengine
+QT += qml quick
+lessThan(QT_MAJOR_VERSION, 6) {
+    QT += webengine
+} else {
+    QT += webenginequick
+}
 
 CONFIG += qmltypes
 

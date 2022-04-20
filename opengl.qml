@@ -5,6 +5,7 @@ import OpenGLUnderQML 1.0
 
 Window {
     id: rootWindow
+    title: "OPENGL"
     visible: true
     width: 200
     height: 200

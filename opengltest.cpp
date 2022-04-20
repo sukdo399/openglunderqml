@@ -1,7 +1,7 @@
 #include "opengltest.h"
 
 #include <QtQuick/qquickwindow.h>
-#include <QtGui/QOpenGLShaderProgram>
+#include <QOpenGLShaderProgram>
 #include <QtGui/QOpenGLContext>
 #include <QtCore/QRunnable>
 
@@ -306,9 +306,10 @@ void OpenglTestRenderer::paint()
     m_program->disableAttributeArray(0);
     m_program->release();
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     // Not strictly needed for this example, but generally useful for when
     // mixing with raw OpenGL.
     m_window->resetOpenGLState();
-
+#endif
     m_window->endExternalCommands();
 }

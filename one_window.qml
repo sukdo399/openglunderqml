@@ -6,6 +6,7 @@ import OpenGLUnderQML 1.0
 Window {
     id: rootWindow
     visible: true
+    title: "ONEWINDOW"
     color: "transparent"
     width: 1280
     height: 720
